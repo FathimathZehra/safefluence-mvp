@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Safefluence - MVP</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f4ff;
+      padding: 20px;
+    }
+    h1 {
+      color: #334;
+    }
+    #chatbox {
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 10px;
+      max-width: 600px;
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    #userInput {
+      width: 80%;
+      padding: 10px;
+    }
+    #sendBtn {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👋 Welcome to Safefluence</h1>
+  <p>This is a simple MVP chatbot that helps you scan content, learn safely, and grow wisely!</p>
+
+  <div id="chatbox">
+    <p><strong>Bot:</strong> Hi! What do you want help with? (e.g., "Cyberattack", "Hate", "Link", "Wellness", "Quiz")</p>
+  </div>
+
+  <input type="text" id="userInput" placeholder="Type your message...">
+  <button id="sendBtn">Send</button>
+
+  <script src="chatbot.js"></script>
+  <script>
+    const chatbox = document.getElementById('chatbox');
+    const input = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // Placeholder function for chatbot logic
+    const chatbotFlow = {
+      Cyberattack: "Please answer: Have you experienced unauthorized access recently?",
+      Hate: "Is the hate coming from strangers or someone you know?",
+      Link: "Paste the suspicious link and I’ll try to check it.",
+      Wellness: "Feeling overwhelmed? I have tips for you.",
+      Quiz: "Start your quiz here: [Coming soon!]",
+      default: "Sorry, I didn't understand that. Try again!"
+    };
+
+    sendBtn.onclick = () => {
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      const userMsg = `<p><strong>You:</strong> ${userText}</p>`;
+      chatbox.innerHTML += userMsg;
+
+      let botReply = chatbotFlow[userText] || chatbotFlow.default;
+      chatbox.innerHTML += `<p><strong>Bot:</strong> ${botReply}</p>`;
+      input.value = "";
+      chatbox.scrollTop = chatbox.scrollHeight;
+    };
+  </script>
+</body>
+</html>
